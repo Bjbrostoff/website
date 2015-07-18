@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>三人下 - Class Search</title>
+<link rel="stylesheet" type="text/css" href="styles/jquery-ui.min.css"
+	media="screen" />
+<link rel="stylesheet" type="text/css" href="styles/class_search.css"
+	media="screen" />
+
+<script src="scripts/jquery-2.0.3.js"></script>
+<script src="scripts/jquery-tmpl.js"></script>
+<script src="scripts/jquery-ui.min.js"></script>
+
+<script src="scripts/jquery.validate.js"></script>
+<script src="scripts/jquery-serialization.js"></script>
+<script src="scripts/classes-controller.js"></script>
+<script src="scripts/students-controller.js"></script><!-- Not sure about copyright -->
+<script src="scripts/hammer.min.js"></script>
+<script src="scripts/underscore.js"></script>
+
+</head>
+
+<header>
+		<ol>
+			<li id = "Logo"><img src="logo.png" height = "80" width = "80"></img></li>
+			<li id = "SearchBar">
+				<input id="s" type="text"></input>
+				<button type="submit" value="Submit" id="submitButton"></input>
+			</li>
+			<li id = "ShoppingCart"><img src="shoppingCart.png" height = "80" width = "80"></img></li>
+			<li id = "Man"><img src="profile-icon.png" height = "75" width = "75"></img></li>
+		</ol>
+</header>
+<body  id="webPage">
+	<section id = "searchBlock">
+		<div id = "searchUtilities">
+			<h2>Narrow Your Search</h2>
+				<div>
+					<h3>Price</h3>
+					<label for="totalamount">Total Price:</label>
+					<input type="text" id="totalamount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+					<div id = "totalPrice"></div>
+					<label for="hourlyamount">Hourly Price:</label>
+					<input type="text" id="hourlyamount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+					<div id = "hourlyPrice"></div>
+				</div>
+				<div>
+					<h3>Length (hrs)</h3>
+					<div id = "lengthhrs"></div>
+				</div>
+				<div>
+					<h3>Distance (km)</h3>
+					<div id = "distancekm"></div>
+				</div>
+				<input id = "nativeSpeaker" type = "checkbox" value = "NS"></input><label>Native Speaker</label>
+				<input id = "classroom" type = "checkbox" value = "inClassroom"></input><label>In Classroom</label>
+		</div>
+		<div id = "searchResults">
+			<div id = "searchWithinBar">
+				<span id ="searchWithinInputSpan">Search Within:</span>
+				<input id="searchWithinInput" title="type A" class="ui-autocomplete-input" autocomplete="on">
+				<button id="searchGoButton" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button"><span class="ui-button-text">Go</span></button>
+			</div>
+			<dl id = "searchFiltersBar">
+				<dd id = "testSearchFilter">
+					<span id = "testSearchFilterSpan">Test
+						<a href = "javascript:void(0)" style="text-decoration: none;"onclick=""><sup>x</sup></a>
+					</span>
+				</dd>
+			</dl>
+			<div id = "sortBar">
+				<span>Sort by:</span>
+				<select id = "sortByMenu">
+					<option selected ="selected">Rating</option>
+					<option>Total Price</option>
+					<option>Hourly Price</option>
+					<option>Distance (km)</option>
+				</select>
+				<span>Show:</span>
+				<select id = "showMenu">
+					<option>5</option>
+					<option selected ="selected">10</option>
+					<option>15</option>
+					<option>20</option>
+				</select>
+			</div>
+			<div id = "searchContainer">
+			</div>
+		</div>
+		<div id = "rightBar">
+		</div>
+	</section>
+</body>
+<footer>
+	<div id = "companyList">
+		<h2>Company</h2>
+		<ul>
+			<li><span>About</span></li>
+			<li><span>Careers</span></li>
+			<li><span>Contact</span></li>
+			<li><span>Blog</span></li>
+		</ul>
+	</div>
+	<div id = "communityList">
+		<h2>Community</h2>
+		<ul>
+			<li><span>Membership</span></li>
+			<li><span>Discussions</span></li>
+			<li><span>FAQ</span></li>
+		</ul>
+	</div>
+	<div id = "teachingList">
+		<h2>Teaching</h2>
+		<ul>
+			<li><span>Become a Teacher</span></li>
+			<li><span>Become a Helper</span></li>
+		</ul>
+	</div>
+	<div id = "mobileList">
+		<h2>Mobile</h2>
+		<ul>
+			<li><span>fb</span></li>
+			<li><span>g+</span></li>
+			<li><span>RR</span></li>
+			<li><span>QQ</span></li>
+		</ul>
+	</div>
+</footer>
+<script>
+    $(function() {
+		$( "#totalPrice" ).slider({
+		  range: true,
+		  min: 0,
+		  max: 500,
+		  values: [ 75, 300 ],
+		  slide: function( event, ui ) {
+			$( "#totalamount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+		  }
+		});
+		$( "#totalamount" ).val( "$" + $( "#totalPrice" ).slider( "values", 0 ) +
+		  " - $" + $( "#totalPrice" ).slider( "values", 1 ) );
+    });
+    $(function() {
+		$( "#hourlyPrice" ).slider({
+		  range: true,
+		  min: 0,
+		  max: 500,
+		  values: [ 75, 300 ],
+		  slide: function( event, ui ) {
+			$( "#hourlyamount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+		  }
+		});
+		$( "#hourlyamount" ).val( "$" + $( "#hourlyPrice" ).slider( "values", 0 ) +
+		  " - $" + $( "#hourlyPrice" ).slider( "values", 1 ) );
+	});
+	$("#sortByMenu").menu();
+	$("#showMenu").menu();
+	
+	
+	if (window.indexedDB) { 
+		$.getScript( "scripts/site-indexeddb.js" )
+		.done(function( script, textStatus ) {
+			initScreen();
+		})
+		.fail(function( jqxhr, settings, exception ) {
+			console.log( 'Failed to load indexed db script' );
+		});
+	}
+	function initScreen() {
+		$(document).ready(function() {
+			$("#searchGoButton").click(function(){
+				classesController.search($("#searchWithinInput").val(),'#searchContainer');
+			});
+			$("#searchWithinInput").keyup(function(event){
+				if(event.keyCode == 13){
+					$("#searchGoButton").click();
+				}
+			});			
+			classesController.init($('#webPage'), function() {
+				classesController.loadSearchResults('#searchContainer');
+			});	
+		});
+	}
+ </script>
+ <script type="text/html" id='searchResultsDivTemplate'>
+ <%var x = 10;%>
+	<% _.each(classes,function(cl){  %>
+            <div id = "searchResultsDiv">
+				<div id = "searchResultLeft">
+					<span><%=cl.distance%> km away</span>
+					<img src=<%=cl.image%> />
+					<h3><%=cl.teacher%></h3>
+				</div>
+				<div id = "searchResultMid">
+					<h2><%=cl.name%></h2>
+					<ul>
+						<li>Length (weeks): <%=cl.length%></li>
+						<li>Number of classes: <%=cl.numClasses%></li>
+						<li><span>
+							<%for(var i = 0; i < cl.rating; i++){%>
+								<span>★</span>
+							<%}%>
+							<%for(var i = cl.rating; i < 5; i++){%>
+								<span>☆</span>
+							<%}%>
+						</span></li>
+					</ul>
+				</div>
+				<div id = "searchResultRight">
+					<div><span>
+						<%if(cl.isOpen === true){%>
+							Open!
+						<%}else{%>
+							Click for Availability
+						<%}%>
+					</span></div>
+					<div><h1><%=cl.price%> kuai/hr</h1></div>
+					<div><span>Limit: <%=cl.studentLimit%> students/class</span></div>
+				</div>
+			</div>
+    <% }); %>
+ 
+ </script>
+ </html>

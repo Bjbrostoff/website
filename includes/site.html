@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>三人下</title>
+
+
+<link rel="stylesheet" type="text/css" href="styles/website.css"
+	media="screen" />
+<script src="scripts/jquery-2.0.3.js"></script>
+<script src="scripts/jquery-tmpl.js"></script>
+<script src="scripts/jquery.validate.js"></script>
+<script src="scripts/jquery-serialization.js"></script>
+<script src="scripts/classes-controller.js"></script>
+<script src="scripts/students-controller.js"></script>
+<script src="scripts/better-simple-slideshow.js"></script> <!-- Not sure about copyright -->
+<script src="scripts/hammer.min.js"></script>
+<script src="scripts/underscore.js"></script>
+</head>
+<body>
+	<header>
+		<ol>
+			<li id = "Logo"><img src="logo.png" height = "80" width = "80"></img></li>
+			<li id = "SearchBar">
+				<input id="s" type="text"></input>
+				<input type="submit" value="Submit" id="submitButton"></input>
+			</li>
+			<li id = "ShoppingCart"><img src="shoppingCart.png" height = "80" width = "80"></img></li>
+			<li id = "Man"><img src="profile-icon.png" height = "75" width = "75"></img></li>
+		</ol>
+	</header>
+	<main  id="webPage">
+		<section id="loginBlock">
+			<div class="bss-slides num1" tabindex="1" autofocus="autofocus">
+				<figure>
+				  <img src="img/medium.jpg"/><figcaption>"Medium" by <a href="https://www.flickr.com/photos/thomashawk/14586158819/">Thomas Hawk</a>.</figcaption> 
+				</figure>
+				<figure>
+				  <img src="img/colorado.jpg"/><figcaption>"Colorado" by <a href="https://www.flickr.com/photos/stuckincustoms/88370744">Trey Ratcliff</a>.</figcaption> 
+				</figure>
+				<figure>
+				  <img src="img/monte-vista.jpg" /><figcaption>"Early Morning at the Monte Vista Wildlife Refuge, Colorado" by <a href="https://www.flickr.com/photos/davesoldano/8572429635">Dave Soldano</a>.</figcaption> 
+				</figure>
+				<figure>
+				  <img src="img/sunrise.jpg" /><figcaption>"Sunrise in Eastern Colorado" by <a href="https://www.flickr.com/photos/35528040@N04/6673031153">Pam Morris</a>.</figcaption> 
+				</figure>
+				<figure>
+				  <img src="img/colorado-colors.jpg"/><figcaption>"colorado colors" by <a href="https://www.flickr.com/photos/cptspock/2857543585">Jasen Miller</a>.</figcaption> 
+				</figure>
+			</div>  
+			<div id = "login">
+				<div id = "studentLogin">
+					<h2>Student Login</h2>
+					<input id="studentUsername" type="text" placeholder="Username"></input>
+					<input id="studentPassword" type="password" placeholder="Password"></input>
+				</div>
+				<div id = "teacherLogin">
+					<h2>Teacher Login</h2>
+					<input id="teacherUsername" type="text" placeholder="Username"></input>
+					<input id="teacherPassword" type="password" placeholder="Password"></input>
+				</div>
+			</div>
+		</section>
+		<section id = "middleBlock">
+			<div id = "classesBlock">
+				<div id = "classesBanner">
+					<a href="" id = "classesTitle"><h2>Promoted Classes</h2></a>
+					<a href = "" id = "seeAllClassesBtn"><h2>See All</h2></a>
+				</div>
+				<table id = "promotedClasses">
+					<colgroup>
+						<col width="33%">
+						<col width="33%">
+						<col width="33%">
+					</colgroup>
+				<tbody>
+					<tr id = "promotedClassesRow">
+					</tr>
+				</tbody>
+				</table>
+			</div>
+			<div id = "topStudents">
+				<h2>Top Students</h2>
+				<table id = "topStudentsTable">
+					<tbody id = "topStudentsTableBody">
+					</tbody>
+				</table>
+			</div>
+		</section>
+	</main>
+	<footer>
+		<div id = "companyList">
+			<h2>Company</h2>
+			<ul>
+				<li><span>About</span></li>
+				<li><span>Careers</span></li>
+				<li><span>Contact</span></li>
+				<li><span>Blog</span></li>
+			</ul>
+		</div>
+		<div id = "communityList">
+			<h2>Community</h2>
+			<ul>
+				<li><span>Membership</span></li>
+				<li><span>Discussions</span></li>
+				<li><span>FAQ</span></li>
+			</ul>
+		</div>
+		<div id = "teachingList">
+			<h2>Teaching</h2>
+			<ul>
+				<li><span>Become a Teacher</span></li>
+				<li><span>Become a Helper</span></li>
+			</ul>
+		</div>
+		<div id = "mobileList">
+			<h2>Mobile</h2>
+			<ul>
+				<li><span>fb</span></li>
+				<li><span>g+</span></li>
+				<li><span>RR</span></li>
+				<li><span>QQ</span></li>
+			</ul>
+		</div>
+	</footer>
+</body>
+<!-- Templates -->
+<script type="text/html" id='promotedRow'>
+	<% _.each(classes,function(cl,key,list){%>
+            <td>
+				<img src=<%=cl.image%> />
+				<div>
+					<%console.log(cl.name);%>
+					<%console.log(cl.teacher);%>
+					<a href=""><span id = "className"><%=cl.name%></span></a>
+					<a href=""><span id = "classTeacher"><%=cl.teacher%></span></a>
+				</div>
+				<div><%=cl.tags%></div>
+				<div><span>
+					<%for(var i = 0; i < cl.rating; i++){%>
+						<span>★</span>
+					<%}%>
+					<%for(var i = cl.rating; i < 5; i++){%>
+						<span>☆</span>
+					<%}%>
+				</span></div>
+			</td>
+    <% }); %>
+</script>
+<script type="text/html" id='topStudentsTBody'>
+	<% _.each(students,function(student,key,list){  %>
+			<tr><td>
+				<img src=<%=student.image%> />
+				<a href=""><span><%=student.name%></span></a>
+				<div><span>
+					<%for(var i = 0; i < student.rating; i++){%>
+						<span>★</span>
+					<%}%>
+					<%for(var i = student.rating; i < 5; i++){%>
+						<span>☆</span>
+					<%}%>
+				</span></div>
+			</td></tr>
+    <% }); %>
+</script>
+
+<script>
+var opts = {
+    auto : {
+        speed : 3500, 
+        pauseOnHover : true
+    },
+    fullScreen : false, 
+    swipe : true
+};
+makeBSS('.num1', opts);
+
+			
+if (window.indexedDB) { 
+	$.getScript( "scripts/site-indexeddb.js" )
+	.done(function( script, textStatus ) {
+		initScreen();
+	})
+	.fail(function( jqxhr, settings, exception ) {
+		console.log( 'Failed to load indexed db script' );
+	});
+}
+function initScreen() {
+	$(document).ready(function() {
+		classesController.init($('#webPage'), function() {
+			classesController.loadPromoted('#promotedClassesRow');
+		});	
+		studentsController.init($('#webPage'), function() {
+			studentsController.loadStudents('#topStudentsTableBody');
+		});				
+	});
+	$("#submitButton").click(function(){
+		$("main").load("/class_search_onepage.html",function(){
+			classesController.search($("#s").val(),'#searchContainer');
+		});
+	});
+	$("#s").keyup(function(event){
+		if(event.keyCode == 13){
+			$("#submitButton").click();
+		}
+	});	
+}
+</script>
+
+</html>

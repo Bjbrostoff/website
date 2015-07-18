@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title><?php echo $page_title; ?></title>
+<link rel="stylesheet" type="text/css" href="styles/website.css"
+	media="screen" />
+<script src="scripts/jquery-2.0.3.js"></script>
+<script src="scripts/jquery.validate.js"></script>
+<script src="scripts/jquery-serialization.js"></script>
+<script src="scripts/classes-controller.js"></script>
+<script src="scripts/students-controller.js"></script>
+<script src="scripts/better-simple-slideshow.js"></script> <!-- Not sure about copyright -->
+<script src="scripts/hammer.min.js"></script>
+</head>
+<header>
+	<ol>
+		<li id = "Logo"><img src="logo.png" height = "80" width = "80"></img></li>		
+		<li id = "SearchBar">				
+		<form action="class_search.php" method="post">
+			<input id="s" type="text" name = "search"></input>					
+			<input type="submit" value="Submit" id="submitButton"></input>
+		</form>
+		</li>
+		<li id = "ShoppingCart"><img src="shoppingCart.png" height = "80" width = "80"></img></li>
+		<li id = "Man"><img src="profile-icon.png" height = "75" width = "75"></img></li>
+	</ol>
+</header>
