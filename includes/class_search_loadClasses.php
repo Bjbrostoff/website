@@ -5,7 +5,8 @@
 	{
 		$q = "SELECT * FROM classes WHERE teacher LIKE '".$_POST['searchWithinInput']."%' ". "ORDER BY rating LIMIT 3";
 	}
-	$r = @mysqli_query($dbc, $q);$to_write = "";
+	$r = @mysqli_query($dbc, $q);
+	$to_write = "";
 		while ($row = mysqli_fetch_assoc($r)){
 			$to_write .= '
 			<div id = "searchResultsDiv">

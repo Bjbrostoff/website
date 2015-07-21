@@ -1,6 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
 	<?php 
 		$page_title = '三人下 - Profile';
 		include ('header.html'); 
@@ -58,17 +55,16 @@
 			$("#mainBlock").html(data);
 		});
 	}
-	function initScreen() {
-		$(document).ready(function() {
-			<?php echo 'var user_id = 1;';
-			
-			?>
-			//problem right now is that tabs are in a form, rather than buttons... :/
-/* 			$("#radio2").click(function(){
-				console.log("hello world");
-				loadProfile(user_id, $(this).attr("id").val());
-			}); */
+	$(document).ready(function() {
+		<?php echo 'var user_id = 1;';
+		
+		?>
+		//problem right now is that tabs are in a form, rather than buttons... :/
+		$("#profileRadioSet input:radio").click(function(){
+			console.log("hello world");
+			loadProfile(user_id, $(this).attr("id"));
 		});
-	}
+	});
+	
 </script>
 </html>
