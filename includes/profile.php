@@ -33,22 +33,17 @@
 					<span>Review Me</span>
 				</div>
 			</div>
-			<form id = "profileTab" style="margin-top: 1em;">
+			<form id = "profileTab" style="margin-top: 1em;" action="profile_loadProfile.php" method="post">
 				<div id="profileRadioSet">
-					<input type="radio" id="radio1" name="radio"><label for="radio1">Personal Information</label>
-					<input type="radio" id="radio2" name="radio"><label for="radio2">Education Background</label>
-					<input type="radio" id="radio3" name="radio"><label for="radio3">Classes Offered</label>
-					<input type="radio" id="radio4" name="radio"><label for="radio4">Reviews</label>
-					<input type="radio" id="radio5" name="radio"><label for="radio5">Questions</label>
-					<input type="radio" id="radio6" name="radio"><label for="radio6">Make an Appointment</label>
+					<input type="radio" id="radio1" name="radio" checked = "checked"><label for="radio1">About Me</label>
+					<input type="radio" id="radio2" name="radio"><label for="radio2">Reviews</label>
+					<input type="radio" id="radio3" name="radio"><label for="radio3">Questions</label>
+					<input type="radio" id="radio4" name="radio"><label for="radio4">Make an Appointment</label>
 				</div>
 			</form>
 		</div>
 	</section>
 	<section id ="mainBlock">
-		<div id = "leftAwardsBar"></div>
-		<div id = "midClassesOfferedBar"></div>
-		<div id = "rightReviewsBar"></div>
 	</section>
 	<section id = "activitiesBlock">
 	</section>			
@@ -57,5 +52,23 @@
 <script>
 	$('#nameContainer > button').button();
 	$('#profileRadioSet').buttonset();
+	
+	function loadProfile(userID, tab){
+		$.post("profile_loadProfile.php", {userID: userID, tab: tab}, function( data ){
+			$("#mainBlock").html(data);
+		});
+	}
+	function initScreen() {
+		$(document).ready(function() {
+			<?php echo 'var user_id = 1;';
+			
+			?>
+			//problem right now is that tabs are in a form, rather than buttons... :/
+/* 			$("#radio2").click(function(){
+				console.log("hello world");
+				loadProfile(user_id, $(this).attr("id").val());
+			}); */
+		});
+	}
 </script>
 </html>
