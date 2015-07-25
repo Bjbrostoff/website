@@ -318,8 +318,7 @@ main{
 }
 
 footer{
-	float: left;
-	width: 79%;
+	width: 100%;
 }
 footer div{
 	display: inline-block;

@@ -1,109 +1,28 @@
-body, h1, h2, h3, h4, h5, h6, p, ul, dl, ol, form, fieldset, input, label, table, tbody, tfoot, th, tr, td, textarea, select {
-font-family: "garamond", helvetica, "lucinda sans unicode", "sans serif";
-font-weight: normal;
-color: #333;
-padding: 0;
-border: 0;
-margin: 0;
-font-size: 12px;
-}
 h2{
-	font-family: "garamond";
-	font-size: 20px;
-	font-style: italic;
+	font-size: 36px;
 }
 h3{
 	font-family: "garamond";
-	font-size: 14px;
+	font-size: 26px;
 	font-style: italic;
 }
-header {
-	width:100%;
-	height:80px;
-	background:#d1e0e1;
-	color: #333;
-	font-weight: bold;
-	font-size: 20px;
-	text-align:center;
-	line-height: 80px;
+#webPage{
+	height:800px;
 }
-header ol{
-	display: block
-}
-header ol li{
-	display:inline-block;
-	padding: 0;
-	margin: 0;
-	vertical-align: top;
-}
-
-#Logo{
-	width:15%;
-}
-
-#SearchBar{
-	width:50%;
-}
-#SearchBar{
-	vertical-align: middle;
-}
-
-#submitButton{
-	background-image:url("img/buttons.png");
-	background-repeat:no-repeat;
-	float: right;
-	width: 83px;
-	height:36px;
-	text-indent:-9999px;
-	overflow:hidden;
-	text-transform:uppercase;
-	border:none;
-	cursor:pointer;
-}
-
-#submitButton:hover{
-	background-position:left bottom;
-}
-
-#s{
-	/* The search text box. */
-	border:none;
-	color:#888888;
-	background-image:url("img/searchBox.png");
-	background-repeat:no-repeat;
-	float:left;
-	font-family:Arial,Helvetica,sans-serif;
-	font-size:15px;
-	height:36px;
-	line-height:36px;
-	margin-right:12px;
-	outline:medium none;
-	text-shadow:1px 1px 0 white;
-	padding: 0 0 0 35px;
-	width:250px;
-	border-radius:8px;
-}
-#ShoppingCart{
-	width:15%;
-}
-#Man{
-	width:15%;
-}
-
 #topSection{
 	margin-top:1%;
 	width:100%;
 	outline: medium;
 	background:yellow;
-	height:150px;
+	height: 175px;
 	position: relative;
 }
 #profilePicture{
 	float:left;
-	margin-left:5%;
-	margin-top: 3.4%;
-	width: 15%;
-	height:65%;
+	margin-left:2%;
+	margin-top: 1%;
+	width: 200px;
+	height:150px;
 	background:green;
 	vertical-align:bottom;
 }
@@ -115,7 +34,8 @@ header ol li{
     margin-right: auto;
 }
 #buttonInfoContainer{
-	margin-top: 5%;
+	margin-top: 3%;
+	margin-right: 5%;
 	float:right;
 	width:80%;
 	background:red;
@@ -140,30 +60,62 @@ header ol li{
 }
 #reviewsBar{
 	display:inline-block;
-	margin-left: 5%
+	margin-left: 5%;
 }
 #profileTab{
-	float:right;
 	width:79%;
+	font-size: 200%;
 	position: absolute;
-	bottom: 0px;
-	right: 0px;
+	bottom:0px;
+	right:0px;
 }
 #mainBlock{
-	height:500px;
+	height:74%;
 	display:block;
 }
-#leftAwardsBar{
+#websiteAwards{
 	float:left;
-	width:15%;
+	width:30%;
+	background: green;
+	margin-left:2%;
 }
-#midClassesOfferedBar{
+#classesOffered{
 	float:right;
-	width:65%;
+	width:32%;
+	display:block;
+	margin-left:1%;
+	margin-right:1%;
+	font-size: 20px;
 }
-#rightReviewsBar{
+#classesTitle{
+	padding-left:3%;
+	border-bottom-width: 3px;
+	border-style: solid;
+	font-size: 36px;
+	width:97%;
+}
+.profile_classes_img{
+	width:200px;
+	height: 150px;
+	float: left;
+	padding-left:3%;
+	padding-top:8px;
+}
+.profile_classes_offered_rightdiv{
 	float:right;
-	width:20%;
+	display:block;
+	padding-right:3%;
+	width:50%;
+	padding-top: 8px;
+}
+.profile_classes_offered_rightdiv h3{
+	border-style: solid;
+	border-bottom-width: 1px;
+}
+#profileReviews{
+	float:right;
+	width:30%;
+	margin-right:3%;
 }
 #activitiesBlock{
 	display:block;
