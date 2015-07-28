@@ -32,10 +32,11 @@
 			</div>
 			<form id = "profileTab" style="margin-top: 1em;" action="profile_loadProfile.php" method="post">
 				<div id="profileRadioSet">
-					<input type="radio" id="radio1" name="radio" checked = "checked"><label for="radio1">About Me</label>
-					<input type="radio" id="radio2" name="radio"><label for="radio2">Reviews</label>
-					<input type="radio" id="radio3" name="radio"><label for="radio3">Questions</label>
-					<input type="radio" id="radio4" name="radio"><label for="radio4">Make an Appointment</label>
+					<input type="radio" id="radio1" name="radio" checked = "checked"><label for="radio1">Home</label>
+					<input type="radio" id="radio2" name="radio"><label for="radio2">About Me</label>
+					<input type="radio" id="radio3" name="radio"><label for="radio3">Reviews</label>
+					<input type="radio" id="radio4" name="radio"><label for="radio4">Questions</label>
+					<input type="radio" id="radio5" name="radio"><label for="radio5">Make an Appointment</label>
 				</div>
 			</form>
 		</div>
