@@ -63,6 +63,130 @@
 		echo $to_write;
 		echo '</div>';
 	}
+	function loadAboutMe(){
+		global $teacherID, $dbc;
+		$q = "SELECT * FROM teachers WHERE teacherID = '".$teacherID."'";
+		$r = @mysqli_query($dbc, $q);
+		$teacher = mysqli_fetch_assoc($r);
+		$eatArray = json_decode($teacher['educationAndTraining']);
+		$specArray = json_decode($teacher['speciality']);
+		$bio = $teacher['bio'];
+		$cAppArray = explode(", ", $teacher['collegeApplications']);
+		$workExpArray = json_decode($teacher['workExperience']);
+		$to_write = "";
+		$to_write .='
+			<table id = "backgroundTable">
+				<tbody>
+					<tr>
+						<td class = "backgroundTableLeft"></td>
+						<td class = "backgroundTableRight">
+							<span><h2>Education and Training</h2></span>
+						</td>
+					</tr>
+					<tr>
+						<td class = "backgroundTableLeft">
+							<img id = "collegePlaceHolder" src = "img/'.$teacher['eATPic'].'"/>
+							<span>Pomona College - 4</span>
+						</td>
+						<td class = "backgroundTableRight">
+							<table>';
+							foreach ($eatArray as $key => $value){
+								$to_write.='
+								<tr>
+									<td>'.$key.'</td>
+									<td>'.$value.'</td>
+								</tr>';
+							}
+							$to_write.='</table>
+						</td>
+					</tr>
+					<tr>
+						<td class = "backgroundTableLeft"></td>
+						<td class = "backgroundTableRight">
+							<span><h2>Speciality</h2></span>
+						</td>
+					</tr>
+					<tr>
+						<td class = "backgroundTableLeft">
+							<img id = "classPlaceHolder" src = "img/'.$teacher['specPic'].'"/>
+							<span>US History</span>
+							<span>★★★★★</span>
+						</td>
+						<td class = "backgroundTableRight">
+							<table>';
+							for($i = 0; $i < count($specArray); $i++){
+								$to_write.='
+								<tr>
+									<td>'.$specArray["$i"].'</td>
+									<td></td>
+								</tr>';
+							}
+							$to_write.='</table>
+						<td>
+					</tr>
+					<tr>
+						<td class = "backgroundTableLeft"></td>
+						<td class = "backgroundTableRight">
+							<span><h2>Biography</h2></span>
+						</td>
+					</tr>
+					<tr>
+						<td class = "backgroundTableLeft">
+							<img id = "bioPic" src = "img/'.$teacher['specPic'].'"/>
+						</td>
+						<td class = "backgroundTableRight">
+							'.$bio.'
+						<td>
+					</tr>
+					<tr>
+						<td class = "backgroundTableLeft"></td>
+						<td class = "backgroundTableRight">
+							<span><h2>College Applications</h2></span>
+						</td>
+					</tr>
+					<tr>
+						<td class = "backgroundTableLeft">
+							<img id = "collegeAppPicPlaceHolder" src = "img/'.$teacher['cAppPic'].'"/>
+						</td>
+						<td class = "backgroundTableRight">
+							<table>';
+							for($i = 0; $i < count($cAppArray); $i++){
+								$to_write.='
+								<tr>
+									<td>'.$cAppArray["$i"].'</td>
+									<td></td>
+								</tr>';
+							}
+							$to_write.='</table>
+						<td>
+					</tr>
+					<tr>
+						<td class = "backgroundTableLeft"></td>
+						<td class = "backgroundTableRight">
+							<span><h2>Work Experience</h2></span>
+						</td>
+					</tr>
+					<tr>
+						<td class = "backgroundTableLeft">
+							<img id = "sanliPicPlaceHolder" src = "img/'.$teacher['workExPic'].'"/>
+							<span>Sanli Inc.</span>
+						</td>
+						<td class = "backgroundTableRight">
+							<table>';
+							foreach ($workExpArray as $key => $value){
+								$to_write.='
+								<tr>
+									<td>'.$key.'</td>
+									<td>'.$value.'</td>
+								</tr>';
+							}
+							$to_write.='</table>
+						<td>
+					</tr>
+				<tbody>
+			</table>';
+		echo $to_write;
+	}
 	switch ($_POST['tab'])
 	{
 		case "radio1":
@@ -75,153 +199,10 @@
 
 			break;
 		case "radio2":
-			 <div id = "AboutMeTopBar">
-				<div id = "AboutMeTopBarLeft"></div>
-					<img id = "aboutMeTopBarPic" src=""/>
-					<span>★★★★★</span>
-					<span>500 Following</span>
-				</div>
-				<div id = "topBarRight">
-					<img id = "statsPlaceHolder" src = ""/>
-				</div>
-				<div id = "topBarMid">
-					<span>BEN BROSTOFF</span>
-					<div>
-						<span>Verified</span>
-						<span>Preferred</span>
-					</div>
-					<div>
-						<button id="followButton" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button"><span class="ui-button-text">WeChat</span></button>
-						<button id="followButton" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button"><span class="ui-button-text">Email</span></button>
-						<button id="followButton" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button"><span class="ui-button-text">Follow</span></button>
-					</div>
-				</div>
-			</div>
-			<table id = "backgroundTable">
-				<tr>
-					<td></td>
-					<td>
-						<span>Education and Training</span>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<img id = "collegePlaceHolder" src = ""/>
-						<span>Pomona College - 4</span>
-					</td>
-					<td>
-						<table>
-							<tr>
-								<td>College Degree</td>
-								<td>B.S. Pomona College</td>
-							</tr>
-							<tr>
-								<td>Major</td>
-								<td>Mathematical Economics</td>
-							</tr>
-							<tr>
-								<td>2 week bullshit course</td>
-								<td>Sanli</td>
-							</tr>
-						</table>
-					<td>
-				</tr>
-				<tr>
-					<td></td>
-					<td>
-						<span>Specialty</span>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<td>
-							<img id = "classPlaceHolder" src = ""/>
-							<span>US History</span>
-							<span>★★★★★</span>
-						</td>
-						<td>
-							<table>
-								<tr>
-									<td>College Degree</td>
-									<td>B.S. Pomona College</td>
-								</tr>
-								<tr>
-									<td>Major</td>
-									<td>Mathematical Economics</td>
-								</tr>
-								<tr>
-									<td>2 week bullshit course</td>
-									<td>Sanli</td>
-								</tr>
-							</table>
-						<td>
-					</td>
-				</tr>
-				<tr>
-					<td></td>
-					<td>
-						<span>Biography</span>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<td>
-							<img id = "bioPic" src = ""/>
-						</td>
-						<td>
-							"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-						<td>
-					</td>
-				</tr>
-				<tr>
-					<td></td>
-					<td>
-						<span>College Applications</span>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<td>
-							<img id = "collegeAppPicPlaceHolder" src = ""/>
-						</td>
-						<td>
-							<table>
-								<tr>
-									<td>Shanghai Sanli Education Co.</td>
-									<td>2014-Present</td>
-								</tr>
-							</table>
-						<td>
-					</td>
-				</tr>
-				<tr>
-					<td></td>
-					<td>
-						<span>Work Experience</span>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<td>
-							<img id = "sanliPicPlaceHolder" src = ""/>
-							<span>Sanli Inc.</span>
-						</td>
-						<td>
-							<table>
-								<tr>
-									<td>Shanghai Sanli Education Co.</td>
-									<td>2014-Present</td>
-								</tr>
-							</table>
-						<td>
-					</td>
-				</tr>
-			</table>
-			
-			
+			loadAboutMe();
+			break;
 			
 		default:
-			echo "hello world";
 			break;
 	}
 ?>
