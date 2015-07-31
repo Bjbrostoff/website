@@ -187,6 +187,88 @@
 			</table>';
 		echo $to_write;
 	}
+	function loadReviewsTab(){
+		global $teacherID, $dbc;
+		$q = "SELECT * FROM reviews WHERE teacherID = '".$teacherID."'";
+		$r = @mysqli_query($dbc, $q);
+		$q2 = "SELECT * FROM teachers WHERE teacherID = '".$teacherID."'";
+		$r2 = @mysqli_query($dbc, $q2);
+		$teacher = mysqli_fetch_assoc($r2);
+		echo'<div id = ReviewsTitle>
+				<h2>'.mysqli_num_rows($r).' Reviews for '.$teacher['teacherName'].'</h2></div>';
+		$to_write ="";
+		while($row = mysqli_fetch_assoc($r)){
+			$q3 = "SELECT * FROM students WHERE studentID = '".$row['studentID']."'";
+			$r3 = @mysqli_query($dbc, $q3);
+			$student = mysqli_fetch_assoc($r3);
+			$q4 = "SELECT * FROM classes WHERE classId = '".$row['classID']."'";
+			$r4 = @mysqli_query($dbc, $q4);
+			$class = mysqli_fetch_assoc($r4);
+			$to_write.='
+					<div class = "review">
+						<div class = "reviewsTopLeft">
+							<img class = "reviewsPic" src = "img/'.$student['image'].'"/>
+							<h2>'.$student['name'].'</h2>
+							<span>';
+							for($i = 0; $i < $row['stars']; $i++){
+								$to_write .= '<span>★</span>';
+							}
+							for($i = $row['stars']; $i < 5; $i++){
+								$to_write .= '<span>☆</span>';
+							}
+							$to_write.='</span>
+							<div class = "qualities">
+								<span class = "quality_line">Difficulty';
+								for($i = 0; $i < $row['difficulty']; $i++){
+									$to_write .= '<span>-</span>';
+								}
+								$to_write.=' '.$row['difficulty'].'/5</span>
+								<span class = "quality_line">Preparedness';
+								for($i = 0; $i < $row['preparedness']; $i++){
+									$to_write .= '<span>-</span>';
+								}
+								$to_write.=' '.$row['preparedness'].'/5</span>
+								<span class = "quality_line">Workload';
+								for($i = 0; $i < $row['workload']; $i++){
+									$to_write .= '<span>-</span>';
+								}
+								$to_write.=' '.$row['workload'].'/5</span>
+								<span class = "quality_line">Fun';
+								for($i = 0; $i < $row['fun']; $i++){
+									$to_write .= '<span>-</span>';
+								}
+								$to_write.=' '.$row['fun'].'/5</span>
+								<span class = "quality_line">Effectiveness';
+								for($i = 0; $i < $row['effectiveness']; $i++){
+									$to_write .= '<span>-</span>';
+								}
+								$to_write.=' '.$row['effectiveness'].'/5</span>
+							</div>
+						</div>
+						<div class = "reviewsTopRight">
+							<div class = "reviewsTopRight_1">
+								<span>Post Date: '.$row['post_date'].'</span>
+								<span>Class: '.$class['name'].'
+							</div>
+							<div class = "reviewsTopRight_2">
+								<span>';
+								if($row['recommend']==1)
+								{
+									$to_write.='I would recommend Ben and his classes to others!';
+								}
+								$to_write.='
+								</span>
+							</div>
+						</div>
+						<p>
+							'.$row['review'].'
+						</p>
+						<h3>Read More</h3>
+					</div>';				
+		}
+		echo $to_write;
+		
+	}
 	switch ($_POST['tab'])
 	{
 		case "radio1":
@@ -201,7 +283,11 @@
 		case "radio2":
 			loadAboutMe();
 			break;
-			
+		case "radio3":
+			echo "hello world";
+			loadReviewsTab();
+
+			break;
 		default:
 			break;
 	}

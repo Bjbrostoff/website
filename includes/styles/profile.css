@@ -67,9 +67,47 @@ h3{
 	bottom:0px;
 	right:0px;
 }
-#mainBlock{
-	height:74%;
+#ReviewsTitle{
+	text-align: center;
+}
+.review{
+	display:inline-block;
+	margin-left: 20%;
+	margin-right: 20%;
+}
+.review p{
+	display:inline-block;
+	text-align: left;
+	margin-bottom: 1%;
+	margin-top: 1%;
+}
+.reviewsTopLeft{
+	display:inline-block;
+	float:left;
+}
+.reviewsTopLeft h2{
+	display:inline-block;
+	vertical-align: middle;
+}
+.qualities{
 	display:block;
+}
+.quality_line{
+	display: block;
+}
+.reviewsTopRight{
+	float:right;
+}
+.review img{
+	width: 120px;
+	height:90px;
+	border-radius: 50%;
+	margin-left: auto;
+    margin-right: auto;
+}
+#mainBlock{
+
+	display:inline-block;
 }
 #websiteAwards{
 	float:left;
